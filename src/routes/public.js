@@ -88,11 +88,10 @@ router.get("/tasks", async (req, res) => {
           },
         },
       },
-      orderBy: {
-        dueDate: "asc",
-      },
     });
+    const order = ["IN_PROGRESS", "PENDING", "CANCELLED", "COMPLETED"];
 
+    tasks.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
     res.render("public/tasks", { tasks });
   } catch (error) {
     console.error("Error fetching public tasks:", error);

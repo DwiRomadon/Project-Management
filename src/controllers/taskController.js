@@ -129,10 +129,11 @@ const listTasks = async (req, res) => {
           },
         },
       },
-      orderBy: {
-        dueDate: "asc",
-      },
     });
+
+    const order = ["IN_PROGRESS", "PENDING", "CANCELLED", "COMPLETED"];
+
+    tasks.sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status));
 
     const users = await prisma.user.findMany();
     res.render("tasks/list", { tasks, users });
