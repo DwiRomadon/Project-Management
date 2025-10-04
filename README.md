@@ -1,397 +1,363 @@
-Project Management System
-A web-based project and task management application built with Node.js, Express, EJS, PostgreSQL, and Prisma ORM. This application enables teams to manage projects, assign tasks, track progress, and collaborate effectively.
+# 🧩 Project Management System
 
-🚀 Features
-Core Features
-✅ Project Management - Create, edit, and delete projects
+**A web-based project and task management application** built with **Node.js, Express, EJS, PostgreSQL, and Prisma ORM**.  
+This application enables teams to manage projects, assign tasks, track progress, and collaborate effectively.
 
-✅ Task Management - Manage tasks with priorities, deadlines, and statuses
+---
 
-✅ Team Collaboration - Assign tasks to team members
+## 🚀 Features
 
-✅ Progress Tracking - Monitor project and task progress in real-time
+### 🧱 Core Features
 
-✅ Responsive Interface - Access from desktop, tablet, or mobile
+- ✅ **Project Management** — Create, edit, and delete projects
+- ✅ **Task Management** — Manage tasks with priorities, deadlines, and statuses
+- ✅ **Team Collaboration** — Assign tasks to team members
+- ✅ **Progress Tracking** — Monitor project and task progress in real-time
+- ✅ **Responsive Interface** — Access from desktop, tablet, or mobile
 
-Security Features
-🔐 User Authentication - Login/register with session management
+### 🔐 Security Features
 
-👁️ Public Access - View projects and tasks without login (read-only)
+- 🔑 **User Authentication** — Login/register with session management
+- 👁️ **Public Access** — View projects and tasks without login (read-only)
+- 🛡️ **Role-based Access** — Only project owners can edit
 
-🔒 Role-based Access - Only project owners can edit
+### ⚙️ Advanced Features
 
-Advanced Features
-📊 Statistics Dashboard - Review project and task metrics
+- 📊 **Statistics Dashboard** — Review project and task metrics
+- 🔔 **Status Notifications** — Alerts for approaching deadlines
+- 🎯 **Task Prioritization** — Priority system (Low, Medium, High, Urgent)
+- 📅 **Time Management** — Manage timelines and deadlines
+- 💻 **Modern UI/UX** — Built with Bootstrap 5 for a user-friendly experience
 
-🔔 Status Notifications - Alerts for approaching deadlines
+---
 
-🎯 Task Prioritization - Priority system (Low, Medium, High, Urgent)
+## 🛠️ Technology Stack
 
-📅 Time Management - Project timelines and task deadlines
+### Backend
 
-📱 Modern UI/UX - User-friendly interface with Bootstrap 5
+- **Node.js** — JavaScript runtime
+- **Express.js** — Web framework
+- **Express Session** — Session management
+- **BCryptJS** — Password encryption
+- **Connect Flash** — Flash message system
 
-🛠️ Technology Stack
-Backend
-Node.js - JavaScript runtime
+### Frontend
 
-Express.js - Web framework
+- **EJS** — Template engine
+- **Bootstrap 5** — CSS framework
+- **Font Awesome** — Icons
+- **JavaScript** — Client-side scripting
 
-Express Session - Session management
+### Database & ORM
 
-BCryptJS - Password encryption
+- **PostgreSQL** — Relational database
+- **Prisma ORM** — Database toolkit and ORM
+- **Docker** — Containerization
 
-Connect Flash - Flash messages
+### Development Tools
 
-Frontend
-EJS - Template engine
+- **Nodemon** — Auto-restart during development
+- **Dotenv** — Manage environment variables
 
-Bootstrap 5 - CSS framework
+---
 
-Font Awesome - Icons
+## 📁 Project Structure
 
-JavaScript - Client-side scripting
-
-Database & ORM
-PostgreSQL - Relational database
-
-Prisma ORM - Database toolkit and ORM
-
-Docker - Containerization for database
-
-Development Tools
-Nodemon - Auto-restart development server
-
-Dotenv - Environment variables
-
-📁 Project Structure
-text
+```text
 web-pm/
 ├─ src/
-│ ├─ controllers/
-│ │ ├─ authController.js
-│ │ ├─ projectController.js
-│ │ └─ taskController.js
-│ ├─ middlewares/
-│ │ ├─ auth.js
-│ │ └─ flash.js
-│ ├─ models/ (via Prisma)
-│ ├─ routes/
-│ │ ├─ auth.js
-│ │ ├─ projects.js
-│ │ ├─ tasks.js
-│ │ └─ public.js
-│ ├─ views/
-│ │ ├─ layouts/
-│ │ │ ├─ main.ejs
-│ │ │ └─ public.ejs
-│ │ ├─ public/
-│ │ │ ├─ projects.ejs
-│ │ │ ├─ project-detail.ejs
-│ │ │ └─ tasks.ejs
-│ │ ├─ projects/
-│ │ │ ├─ list.ejs
-│ │ │ ├─ show.ejs
-│ │ │ └─ edit.ejs
-│ │ ├─ tasks/
-│ │ │ ├─ list.ejs
-│ │ │ └─ show.ejs
-│ │ ├─ index.ejs
-│ │ ├─ login.ejs
-│ │ └─ register.ejs
-│ ├─ utils/
-│ │ └─ password.js
-│ ├─ prismaClient.js
-│ └─ app.js
+│  ├─ controllers/
+│  │  ├─ authController.js
+│  │  ├─ projectController.js
+│  │  └─ taskController.js
+│  ├─ middlewares/
+│  │  ├─ auth.js
+│  │  └─ flash.js
+│  ├─ routes/
+│  │  ├─ auth.js
+│  │  ├─ projects.js
+│  │  ├─ tasks.js
+│  │  └─ public.js
+│  ├─ views/
+│  │  ├─ layouts/
+│  │  │  ├─ main.ejs
+│  │  │  └─ public.ejs
+│  │  ├─ public/
+│  │  │  ├─ projects.ejs
+│  │  │  ├─ project-detail.ejs
+│  │  │  └─ tasks.ejs
+│  │  ├─ projects/
+│  │  │  ├─ list.ejs
+│  │  │  ├─ show.ejs
+│  │  │  └─ edit.ejs
+│  │  ├─ tasks/
+│  │  │  ├─ list.ejs
+│  │  │  └─ show.ejs
+│  │  ├─ index.ejs
+│  │  ├─ login.ejs
+│  │  └─ register.ejs
+│  ├─ utils/
+│  │  └─ password.js
+│  ├─ prismaClient.js
+│  └─ app.js
 ├─ prisma/
-│ ├─ schema.prisma
-│ └─ seed.js
+│  ├─ schema.prisma
+│  └─ seed.js
 ├─ .env
 ├─ docker-compose.yml
 ├─ package.json
 └─ README.md
-🚀 Installation & Setup
-Prerequisites
-Node.js (v16 or higher)
+```
 
-Docker & Docker Compose
+---
 
-PostgreSQL (or use Docker)
+## ⚙️ Installation & Setup
 
-Installation Steps
-Clone repository
+### 📋 Prerequisites
 
-bash
-git clone <repository-url>
-cd web-pm
-Install dependencies
+- Node.js (v16 or higher)
+- Docker & Docker Compose
+- PostgreSQL (or use Docker container)
 
-bash
-npm install
-Setup environment variables
+### 🧩 Steps
 
-bash
-cp .env.example .env
-Edit the .env file and adjust the configuration:
+1. **Clone repository**
 
-env
-DATABASE_URL="postgresql://admin:password@localhost:5432/project_management?schema=public"
-SESSION_SECRET="your-secret-key-here"
-PORT=3000
-Run database with Docker
+   ```bash
+   git clone <repository-url>
+   cd web-pm
+   ```
 
-bash
-docker-compose up -d
-Setup database
+2. **Install dependencies**
 
-bash
+   ```bash
+   npm install
+   ```
 
-# Generate Prisma client
+3. **Setup environment variables**
 
-npx prisma generate
+   ```bash
+   cp .env.example .env
+   ```
 
-# Run migration
+   Edit `.env` file:
 
-npx prisma db push
+   ```env
+   DATABASE_URL="postgresql://admin:password@localhost:5432/project_management?schema=public"
+   SESSION_SECRET="your-secret-key-here"
+   PORT=3000
+   ```
 
-# Seed database with sample data
+4. **Run database with Docker**
 
-npm run db:seed
-Run the application
+   ```bash
+   docker-compose up -d
+   ```
 
-bash
+5. **Setup Prisma and seed database**
 
-# Development mode
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   npm run db:seed
+   ```
 
+6. **Run the application**
+
+   ```bash
+   # Development
+   npm run dev
+
+   # Production
+   npm start
+   ```
+
+7. **Access the application**
+   - Open your browser: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 👤 Default Account
+
+| Email             | Password    |
+| ----------------- | ----------- |
+| admin@example.com | password123 |
+
+---
+
+## 🗄️ Database Models
+
+### User
+
+| Field    | Description                     |
+| -------- | ------------------------------- |
+| id       | Unique identifier               |
+| email    | User email (unique)             |
+| password | Encrypted password              |
+| name     | Full name                       |
+| projects | One-to-many relation to Project |
+| tasks    | One-to-many relation to Task    |
+
+### Project
+
+| Field       | Description                  |
+| ----------- | ---------------------------- |
+| id          | Unique identifier            |
+| name        | Project name                 |
+| description | Project description          |
+| startDate   | Start date                   |
+| endDate     | End date                     |
+| managerId   | User who created the project |
+| tasks       | One-to-many relation to Task |
+
+### Task
+
+| Field       | Description                                              |
+| ----------- | -------------------------------------------------------- |
+| id          | Unique identifier                                        |
+| title       | Task title                                               |
+| description | Task description                                         |
+| status      | Task status (PENDING, IN_PROGRESS, COMPLETED, CANCELLED) |
+| priority    | Priority (LOW, MEDIUM, HIGH, URGENT)                     |
+| dueDate     | Deadline                                                 |
+| projectId   | Related project ID                                       |
+| assigneeId  | Assigned user ID                                         |
+
+---
+
+## 🌐 Routes & Endpoints
+
+### Public Routes
+
+- `GET /` — Home page
+- `GET /public/projects` — List public projects
+- `GET /public/projects/:id` — Project details
+- `GET /public/tasks` — List public tasks
+
+### Authentication Routes
+
+- `GET /login` — Login form
+- `POST /auth/login` — Login
+- `GET /register` — Registration form
+- `POST /auth/register` — Register
+- `POST /auth/logout` — Logout
+
+### Protected Routes (Require Login)
+
+#### Projects
+
+- `GET /projects` — List user’s projects
+- `GET /projects/:id` — View project details
+- `GET /projects/:id/edit` — Edit project
+- `POST /projects` — Create project
+- `PUT /projects/:id` — Update project
+- `DELETE /projects/:id` — Delete project
+
+#### Tasks
+
+- `GET /tasks` — List tasks
+- `GET /tasks/:id` — Task details
+- `POST /tasks` — Create task
+- `PUT /tasks/:id` — Update task
+- `PATCH /tasks/:id/status` — Update status
+- `DELETE /tasks/:id` — Delete task
+
+---
+
+## 💡 Usage Guide
+
+### For New Users
+
+1. Register an account
+2. Login with your credentials
+3. Create a project
+4. Add tasks to your project
+
+### Main Features
+
+- Create/edit/delete projects and tasks
+- Assign members and manage priorities
+- Track project progress
+- View dashboards and notifications
+
+### Public Access
+
+- Guests can view projects/tasks (read-only)
+- Share project links publicly
+
+---
+
+## 🐛 Troubleshooting
+
+| Issue                     | Solution                                                    |
+| ------------------------- | ----------------------------------------------------------- |
+| Database connection error | Ensure Docker is running and `.env` is configured correctly |
+| Prisma client error       | Run `npx prisma generate` then restart app                  |
+| Session error             | Set `SESSION_SECRET` in `.env` and clear cookies            |
+| Port already in use       | Change `PORT` in `.env` or stop conflicting process         |
+
+---
+
+## 🧰 Development Commands
+
+```bash
+# Run app with auto reload
 npm run dev
+
+# Prisma commands
+npx prisma db push
+npx prisma studio
+npm run db:seed
 
 # Production mode
-
 npm start
-Access the application
-Open your browser and visit: http://localhost:3000
+```
 
-👤 Default Account
-After running the seed, a default account is available:
+---
 
-Email: admin@example.com
+## 🤝 Contributing
 
-Password: password123
+1. Fork the repository
+2. Create a new branch
+   ```bash
+   git checkout -b feature/awesome-feature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m "Add awesome feature"
+   ```
+4. Push to branch
+   ```bash
+   git push origin feature/awesome-feature
+   ```
+5. Create a Pull Request
 
-📊 Database Models
-User
-id - Unique identifier
+**Guidelines**
 
-email - User email (unique)
+- Follow existing coding style
+- Add tests for new features
+- Update documentation
+- Ensure all tests pass
 
-password - Encrypted password
+---
 
-name - Full name
+## 📝 License
 
-projects - Relation to Project (one-to-many)
+Distributed under the **MIT License**.  
+See the [LICENSE](LICENSE) file for more information.
 
-tasks - Relation to Task (one-to-many)
+---
 
-Project
-id - Unique identifier
+## 👥 Development Team
 
-name - Project name
+Developed with ❤️ by the **Web-PM Development Team**.
 
-description - Project description
+---
 
-startDate - Start date
+## 📞 Support
 
-endDate - End date
-
-managerId - ID of user who created the project
-
-tasks - Relation to Task (one-to-many)
-
-Task
-id - Unique identifier
-
-title - Task title
-
-description - Task description
-
-status - Task status (PENDING, IN_PROGRESS, COMPLETED, CANCELLED)
-
-priority - Priority (LOW, MEDIUM, HIGH, URGENT)
-
-dueDate - Deadline
-
-projectId - Related project ID
-
-assigneeId - Assigned user ID
-
-🌐 Routes & Endpoints
-Public Routes (No Login Required)
-GET / - Home page
-
-GET /public/projects - Public projects list
-
-GET /public/projects/:id - Public project detail
-
-GET /public/tasks - Public tasks list
-
-Authentication Routes
-GET /login - Login form
-
-POST /auth/login - Login process
-
-GET /register - Registration form
-
-POST /auth/register - Registration process
-
-POST /auth/logout - Logout
-
-Protected Routes (Login Required)
-Projects
-GET /projects - User's projects list
-
-GET /projects/:id - Project detail
-
-GET /projects/:id/edit - Edit project form
-
-POST /projects - Create new project
-
-PUT /projects/:id - Update project
-
-DELETE /projects/:id - Delete project
-
-Tasks
-GET /tasks - All user tasks list
-
-GET /tasks/:id - Task detail
-
-POST /tasks - Create new task
-
-PUT /tasks/:id - Update task
-
-PATCH /tasks/:id/status - Update task status
-
-DELETE /tasks/:id - Delete task
-
-🎯 Usage
-For New Users
-Register - Create a new account on the register page
-
-Login - Sign in with email and password
-
-Create Project - Click "New Project" to start your first project
-
-Add Tasks - In project detail, add tasks by clicking "Add Task"
-
-Main Features
-Project Management
-Create projects with name, description, and timeline
-
-Edit existing projects
-
-Delete projects (including all tasks within)
-
-View project progress statistics
-
-Task Management
-Create tasks with title, description, priority, and deadline
-
-Assign tasks to team members
-
-Update task status (Pending, In Progress, Completed)
-
-Filter tasks by status, priority, or assignee
-
-Mark tasks as completed
-
-Collaboration
-View all tasks in one dashboard
-
-Monitor team progress in real-time
-
-Get notifications for approaching deadlines
-
-Public Access
-Guests can view projects and tasks without login
-
-Read-only mode for transparency
-
-Shareable links for external stakeholders
-
-🐛 Troubleshooting
-Common Issues
-Database Connection Error
-
-Ensure Docker is running: docker-compose up -d
-
-Check connection string in .env
-
-Prisma Client Error
-
-Run: npx prisma generate
-
-Restart application
-
-Session Error
-
-Ensure SESSION_SECRET is set in .env
-
-Clear browser cookies
-
-Port Already in Use
-
-Change PORT in .env
-
-Or stop process using port 3000
-
-Development Commands
-bash
-
-# Development with auto-reload
-
-npm run dev
-
-# Database commands
-
-npx prisma db push # Sync schema
-npx prisma studio # Database GUI
-npm run db:seed # Seed data
-
-# Production
-
-npm start
-🤝 Contributing
-Contributions are welcome! Here's how to contribute:
-
-Fork the repository
-
-Create feature branch: git checkout -b feature/amazing-feature
-
-Commit changes: git commit -m 'Add amazing feature'
-
-Push to branch: git push origin feature/amazing-feature
-
-Create Pull Request
-
-Guidelines
-Follow existing coding style
-
-Add tests for new features
-
-Update documentation
-
-Ensure all tests pass
-
-📝 License
-Distributed under the MIT License. See LICENSE file for more details.
-
-👥 Development Team
-Developed with ❤️ by the development team.
-
-📞 Support
 If you encounter issues or have questions:
 
-Check the Troubleshooting section
-
-Create an issue in the repository
-
-Contact the development team
+- Check the Troubleshooting section
+- Create an issue in the repository
+- Contact the development team
