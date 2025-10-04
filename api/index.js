@@ -27,5 +27,5 @@ app.use("/projects", projectRoutes);
 app.use("/tasks", taskRoutes);
 app.use("/", publicRoutes);
 
-// Export handler for Vercel
-module.exports.handler = serverless(app);
+// ✅ Default export for Vercel
+module.exports = serverless(app);
