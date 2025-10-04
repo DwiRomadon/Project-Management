@@ -1,0 +1,235 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/public/projects">Public Projects</a>
+        </li>
+        <li class="breadcrumb-item active"><%= project.name %></li>
+      </ol>
+    </nav>
+    <h2 class="mb-1">
+      <i class="fas fa-project-diagram me-2 text-primary"></i><%= project.name
+      %>
+    </h2>
+    <% if (project.description) { %>
+    <p class="text-muted mb-0"><%= project.description %></p>
+    <% } %>
+  </div>
+  <div>
+    <a href="/public/projects" class="btn btn-secondary">
+      <i class="fas fa-arrow-left me-2"></i>Back to Projects
+    </a>
+    <a href="/public/tasks" class="btn btn-outline-primary">
+      <i class="fas fa-list-check me-2"></i>View All Tasks
+    </a>
+  </div>
+</div>
+
+<!-- Project Overview -->
+<div class="row mb-4">
+  <div class="col-md-3 mb-3">
+    <div class="card bg-light">
+      <div class="card-body text-center">
+        <i class="fas fa-tasks fa-2x text-primary mb-2"></i>
+        <% const tasks = project.tasks || []; const totalTasksCount =
+        tasks.length; %>
+        <h4><%= totalTasksCount %></h4>
+        <p class="text-muted mb-0">Total Tasks</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card bg-light">
+      <div class="card-body text-center">
+        <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+        <% const completedCount = tasks.filter(t => t.status ===
+        'COMPLETED').length; %>
+        <h4><%= completedCount %></h4>
+        <p class="text-muted mb-0">Completed</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card bg-light">
+      <div class="card-body text-center">
+        <i class="fas fa-spinner fa-2x text-warning mb-2"></i>
+        <% const inProgressCount = tasks.filter(t => t.status ===
+        'IN_PROGRESS').length; %>
+        <h4><%= inProgressCount %></h4>
+        <p class="text-muted mb-0">In Progress</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card bg-light">
+      <div class="card-body text-center">
+        <i class="fas fa-clock fa-2x text-info mb-2"></i>
+        <% const pendingCount = tasks.filter(t => t.status ===
+        'PENDING').length; %>
+        <h4><%= pendingCount %></h4>
+        <p class="text-muted mb-0">Pending</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- Tasks Section -->
+    <div class="card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h5 class="card-title mb-0">
+          <i class="fas fa-list-check me-2"></i>Project Tasks
+        </h5>
+        <span class="badge bg-primary"><%= tasks.length %> tasks</span>
+      </div>
+      <div class="card-body">
+        <% if (tasks.length > 0) { %>
+        <div class="list-group list-group-flush">
+          <% tasks.forEach(task => { const isOverdue = task.dueDate && new
+          Date(task.dueDate) < new Date() && task.status !== 'COMPLETED'; const
+          taskClass = isOverdue ? 'overdue' :
+          task.status.toLowerCase().replace('_', '-'); %>
+          <div class="list-group-item px-0 py-3 task-card <%= taskClass %>">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="flex-grow-1">
+                <div
+                  class="d-flex justify-content-between align-items-start mb-2"
+                >
+                  <h6
+                    class="mb-1 <%= task.status === 'COMPLETED' ? 'text-decoration-line-through text-muted' : '' %>"
+                  >
+                    <%= task.title %> <% if (isOverdue) { %>
+                    <span class="badge bg-danger ms-2">Overdue</span>
+                    <% } %>
+                  </h6>
+                </div>
+
+                <% if (task.description) { %>
+                <p class="text-muted mb-2 small"><%= task.description %></p>
+                <% } %>
+
+                <div class="d-flex flex-wrap gap-3 align-items-center">
+                  <span
+                    class="badge bg-<%= task.priority === 'URGENT' ? 'danger' : task.priority === 'HIGH' ? 'warning' : task.priority === 'MEDIUM' ? 'info' : 'secondary' %>"
+                  >
+                    <i class="fas fa-flag me-1"></i><%= task.priority %>
+                  </span>
+
+                  <span
+                    class="badge bg-<%= task.status === 'COMPLETED' ? 'success' : task.status === 'IN_PROGRESS' ? 'primary' : 'secondary' %>"
+                  >
+                    <%= task.status %>
+                  </span>
+
+                  <small class="text-muted">
+                    <i class="fas fa-calendar me-1"></i>
+                    Due: <% if (task.dueDate) { %> <%= new
+                    Date(task.dueDate).toLocaleDateString() %> <% } else { %> -
+                    <% } %>
+                  </small>
+
+                  <% if (task.assignee) { %>
+                  <small class="text-muted">
+                    <i class="fas fa-user me-1"></i>
+                    <%= task.assignee.name %>
+                  </small>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } else { %>
+        <div class="text-center py-4">
+          <i class="fas fa-tasks fa-3x text-muted mb-3"></i>
+          <h5 class="text-muted">No Tasks in This Project</h5>
+          <p class="text-muted">This project doesn't have any tasks yet.</p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <!-- Project Info Card -->
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-info-circle me-2"></i>Project Information
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="mb-3">
+          <strong>Project Manager:</strong><br />
+          <small class="text-muted">
+            <i class="fas fa-user me-1"></i>
+            <%= project.manager.name %>
+          </small>
+        </div>
+        <div class="mb-3">
+          <strong>Timeline:</strong><br />
+          <small class="text-muted">
+            <i class="fas fa-calendar me-1"></i>
+            <%= new Date(project.startDate).toLocaleDateString() %> - <%= new
+            Date(project.endDate).toLocaleDateString() %>
+          </small>
+        </div>
+        <div class="mb-3">
+          <strong>Created:</strong><br />
+          <small class="text-muted">
+            <i class="fas fa-clock me-1"></i>
+            <%= new Date(project.createdAt).toLocaleDateString() %>
+          </small>
+        </div>
+        <div class="mb-3">
+          <strong>Progress:</strong>
+          <div class="progress mt-1">
+            <% const completedTasks = tasks.filter(t => t.status ===
+            'COMPLETED').length; const totalTasks = tasks.length; const progress
+            = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) :
+            0; %>
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              <% /* eslint-disable css-propertyvalueexpected */ %>
+              style="width: <%= progress %>%"
+              aria-valuenow="<%= progress %>"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <%= progress %>%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Access Notice -->
+    <div class="card mt-4 border-warning">
+      <div class="card-header bg-warning text-dark">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-eye me-2"></i>Public Access
+        </h5>
+      </div>
+      <div class="card-body">
+        <p class="small text-muted mb-3">
+          You are viewing this project in read-only mode. Some features are
+          disabled.
+        </p>
+        <div class="d-grid gap-2">
+          <a href="/login" class="btn btn-primary btn-sm">
+            <i class="fas fa-lock-open me-2"></i>Login for Full Access
+          </a>
+          <a href="/public/projects" class="btn btn-outline-secondary btn-sm">
+            <i class="fas fa-project-diagram me-2"></i>View All Projects
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

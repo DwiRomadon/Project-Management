@@ -1,0 +1,292 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/tasks">Tasks</a></li>
+                <li class="breadcrumb-item active">Task Details</li>
+            </ol>
+        </nav>
+        <h2 class="mb-1">
+            <i class="fas fa-list-check me-2 text-primary"></i>Task Details
+        </h2>
+    </div>
+    <div>
+        <a href="/tasks" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Tasks
+        </a>
+        <a href="/projects/<%= task.project.id %>" class="btn btn-outline-primary">
+            <i class="fas fa-project-diagram me-2"></i>View Project
+        </a>
+    </div>
+</div>
+
+<%
+    const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'COMPLETED';
+%>
+
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Task Details Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title mb-0 <%= task.status === 'COMPLETED' ? 'text-decoration-line-through text-muted' : '' %>">
+                    <%= task.title %>
+                </h3>
+            </div>
+            <div class="card-body">
+                <% if (task.description) { %>
+                    <div class="mb-4">
+                        <h6 class="text-muted mb-2">Description</h6>
+                        <p class="card-text"><%= task.description %></p>
+                    </div>
+                    <hr>
+                <% } %>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Project</h6>
+                            <p class="mb-0">
+                                <a href="/projects/<%= task.project.id %>" class="text-decoration-none">
+                                    <i class="fas fa-project-diagram me-2"></i><%= task.project.name %>
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Due Date</h6>
+                            <p class="mb-0 <%= isOverdue ? 'text-danger fw-bold' : '' %>">
+                                <i class="fas fa-calendar me-2"></i>
+                                <% if (task.dueDate) { %>
+                                    <%= new Date(task.dueDate).toLocaleDateString() %>
+                                    <% if (isOverdue) { %>
+                                        <span class="badge bg-danger ms-2">Overdue</span>
+                                    <% } %>
+                                <% } else { %>
+                                    -
+                                <% } %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Priority</h6>
+                            <p class="mb-0">
+                                <span class="badge bg-<%= 
+                                    task.priority === 'URGENT' ? 'danger' : 
+                                    task.priority === 'HIGH' ? 'warning' : 
+                                    task.priority === 'MEDIUM' ? 'info' : 
+                                    'secondary' 
+                                %>">
+                                    <i class="fas fa-flag me-1"></i><%= task.priority %>
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Status</h6>
+                            <p class="mb-0">
+                                <span class="badge bg-<%= 
+                                    task.status === 'COMPLETED' ? 'success' : 
+                                    task.status === 'IN_PROGRESS' ? 'primary' : 
+                                    'secondary' 
+                                %>">
+                                    <%= task.status %>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Assignee</h6>
+                            <p class="mb-0">
+                                <% if (task.assignee) { %>
+                                    <span class="badge bg-light text-dark">
+                                        <i class="fas fa-user me-1"></i><%= task.assignee.name %>
+                                    </span>
+                                <% } else { %>
+                                    <span class="text-muted">Unassigned</span>
+                                <% } %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Created</h6>
+                            <p class="mb-0 text-muted">
+                                <i class="fas fa-clock me-2"></i>
+                                <%= new Date(task.createdAt).toLocaleString() %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="btn-group" role="group">
+                    <% if (task.status !== 'IN_PROGRESS') { %>
+                        <button type="button" class="btn btn-outline-primary" onclick="updateTaskStatus('<%= task.id %>', 'IN_PROGRESS')">
+                            <i class="fas fa-play me-2"></i>Start Task
+                        </button>
+                    <% } %>
+                    <% if (task.status !== 'COMPLETED') { %>
+                        <button type="button" class="btn btn-outline-success" onclick="updateTaskStatus('<%= task.id %>', 'COMPLETED')">
+                            <i class="fas fa-check me-2"></i>Mark Complete
+                        </button>
+                    <% } %>
+                    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editTaskModal">
+                        <i class="fas fa-edit me-2"></i>Edit Task
+                    </button>
+                    <form action="/tasks/<%= task.id %>?_method=DELETE" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-outline-danger" onclick="return confirmDelete('Are you sure you want to delete this task?')">
+                            <i class="fas fa-trash me-2"></i>Delete Task
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ... rest of the code remains the same ... -->
+</div>
+
+<!-- Edit Task Modal -->
+<div class="modal fade" id="editTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/tasks/<%= task.id %>?_method=PUT" method="POST">
+                <input type="hidden" name="projectId" value="<%= task.project.id %>">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<%= task.title %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"><%= task.description %></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dueDate" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="dueDate" name="dueDate" 
+                                <% if (task.dueDate) { %>
+                                    value="<%= new Date(task.dueDate).toISOString().split('T')[0] %>"
+                                <% } %>
+                                required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select class="form-control" id="priority" name="priority">
+                                <option value="LOW" <%= task.priority === 'LOW' ? 'selected' : '' %>>Low</option>
+                                <option value="MEDIUM" <%= task.priority === 'MEDIUM' ? 'selected' : '' %>>Medium</option>
+                                <option value="HIGH" <%= task.priority === 'HIGH' ? 'selected' : '' %>>High</option>
+                                <option value="URGENT" <%= task.priority === 'URGENT' ? 'selected' : '' %>>Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="PENDING" <%= task.status === 'PENDING' ? 'selected' : '' %>>Pending</option>
+                                <option value="IN_PROGRESS" <%= task.status === 'IN_PROGRESS' ? 'selected' : '' %>>In Progress</option>
+                                <option value="COMPLETED" <%= task.status === 'COMPLETED' ? 'selected' : '' %>>Completed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="assigneeId" class="form-label">Assignee</label>
+                            <select class="form-control" id="assigneeId" name="assigneeId">
+                                <option value="">Unassigned</option>
+                                <% users.forEach(user => { %>
+                                    <option value="<%= user.id %>" <%= task.assigneeId === user.id ? 'selected' : '' %>><%= user.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Task Modal -->
+<div class="modal fade" id="editTaskModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/tasks/<%= task.id %>?_method=PUT" method="POST">
+                <input type="hidden" name="projectId" value="<%= task.project.id %>">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<%= task.title %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"><%= task.description %></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dueDate" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="dueDate" name="dueDate" value="<%= new Date(task.dueDate).toISOString().split('T')[0] %>" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select class="form-control" id="priority" name="priority">
+                                <option value="LOW" <%= task.priority === 'LOW' ? 'selected' : '' %>>Low</option>
+                                <option value="MEDIUM" <%= task.priority === 'MEDIUM' ? 'selected' : '' %>>Medium</option>
+                                <option value="HIGH" <%= task.priority === 'HIGH' ? 'selected' : '' %>>High</option>
+                                <option value="URGENT" <%= task.priority === 'URGENT' ? 'selected' : '' %>>Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="PENDING" <%= task.status === 'PENDING' ? 'selected' : '' %>>Pending</option>
+                                <option value="IN_PROGRESS" <%= task.status === 'IN_PROGRESS' ? 'selected' : '' %>>In Progress</option>
+                                <option value="COMPLETED" <%= task.status === 'COMPLETED' ? 'selected' : '' %>>Completed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="assigneeId" class="form-label">Assignee</label>
+                            <select class="form-control" id="assigneeId" name="assigneeId">
+                                <option value="">Unassigned</option>
+                                <% users.forEach(user => { %>
+                                    <option value="<%= user.id %>" <%= task.assigneeId === user.id ? 'selected' : '' %>><%= user.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

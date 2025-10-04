@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 class="mb-1">
+      <i class="fas fa-list-check me-2 text-primary"></i>Public Tasks
+    </h2>
+    <p class="text-muted">
+      View all tasks across all projects - Read only access
+    </p>
+  </div>
+  <div class="text-end">
+    <a href="/public/projects" class="btn btn-outline-primary">
+      <i class="fas fa-project-diagram me-2"></i>View All Projects
+    </a>
+  </div>
+</div>
+
+<!-- Task Statistics -->
+<div class="row mb-4">
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-primary text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0"><%= tasks.length %></h4>
+        <small>Total</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-secondary text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0">
+          <%= tasks.filter(t => t.status === 'PENDING').length %>
+        </h4>
+        <small>Pending</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-info text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0">
+          <%= tasks.filter(t => t.status === 'IN_PROGRESS').length %>
+        </h4>
+        <small>In Progress</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-success text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0">
+          <%= tasks.filter(t => t.status === 'COMPLETED').length %>
+        </h4>
+        <small>Completed</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-warning text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0">
+          <%= tasks.filter(t => t.priority === 'HIGH' || t.priority ===
+          'URGENT').length %>
+        </h4>
+        <small>High Priority</small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-6 mb-3">
+    <div class="card stat-card bg-danger text-white">
+      <div class="card-body text-center py-3">
+        <h4 class="mb-0">
+          <%= tasks.filter(t => t.dueDate && new Date(t.dueDate) < new Date() &&
+          t.status !== 'COMPLETED').length %>
+        </h4>
+        <small>Overdue</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tasks Table -->
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title mb-0">Task List</h5>
+  </div>
+  <div class="card-body">
+    <% if (tasks.length > 0) { %>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Task</th>
+            <th>Project</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Assignee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tasks.forEach(task => { const isOverdue = task.dueDate && new
+          Date(task.dueDate) < new Date() && task.status !== 'COMPLETED'; %>
+          <tr class="<%= isOverdue ? 'table-warning' : '' %>">
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="me-3">
+                  <i class="fas fa-task text-muted"></i>
+                </div>
+                <div>
+                  <strong
+                    class="<%= task.status === 'COMPLETED' ? 'text-decoration-line-through text-muted' : '' %>"
+                  >
+                    <%= task.title %>
+                  </strong>
+                  <% if (task.description) { %>
+                  <br />
+                  <small class="text-muted">
+                    <%= task.description.substring(0, 50) %><%=
+                    task.description.length > 50 ? '...' : '' %>
+                  </small>
+                  <% } %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a
+                href="/public/projects/<%= task.project.id %>"
+                class="text-decoration-none"
+              >
+                <%= task.project.name %>
+              </a>
+            </td>
+            <td>
+              <span class="<%= isOverdue ? 'text-danger fw-bold' : '' %>">
+                <% if (task.dueDate) { %> <%= new
+                Date(task.dueDate).toLocaleDateString() %> <% } else { %> - <% }
+                %>
+              </span>
+              <% if (isOverdue) { %>
+              <br /><small class="text-danger">Overdue</small>
+              <% } %>
+            </td>
+            <td>
+              <span
+                class="badge bg-<%= task.priority === 'URGENT' ? 'danger' : task.priority === 'HIGH' ? 'warning' : task.priority === 'MEDIUM' ? 'info' : 'secondary' %>"
+              >
+                <i class="fas fa-flag me-1"></i><%= task.priority %>
+              </span>
+            </td>
+            <td>
+              <span
+                class="badge bg-<%= task.status === 'COMPLETED' ? 'success' : task.status === 'IN_PROGRESS' ? 'primary' : 'secondary' %>"
+              >
+                <%= task.status %>
+              </span>
+            </td>
+            <td>
+              <% if (task.assignee) { %>
+              <span class="badge bg-light text-dark">
+                <i class="fas fa-user me-1"></i><%= task.assignee.name %>
+              </span>
+              <% } else { %>
+              <span class="text-muted">Unassigned</span>
+              <% } %>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <% } else { %>
+    <div class="text-center py-5">
+      <i class="fas fa-tasks fa-4x text-muted mb-3"></i>
+      <h4 class="text-muted">No Tasks Available</h4>
+      <p class="text-muted mb-4">
+        There are no tasks to display at the moment.
+      </p>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<div class="alert alert-info mt-4">
+  <div class="d-flex align-items-center">
+    <i class="fas fa-info-circle fa-2x me-3"></i>
+    <div>
+      <h6 class="alert-heading mb-1">Public Access Notice</h6>
+      <p class="mb-0">
+        You are viewing tasks in read-only mode.
+        <a href="/login" class="alert-link">Login</a> to manage tasks and
+        projects.
+      </p>
+    </div>
+  </div>
+</div>

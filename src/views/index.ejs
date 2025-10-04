@@ -1,0 +1,363 @@
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="pe-lg-5">
+          <h1 class="display-4 fw-bold mb-4">
+            <i class="fas fa-tasks me-3"></i>Project Management System
+          </h1>
+          <p class="lead mb-4">
+            Streamline your projects, collaborate with your team, and achieve
+            your goals faster. Our comprehensive project management tool helps
+            you stay organized and productive.
+          </p>
+          <div class="d-grid gap-2 d-md-flex">
+            <% if (typeof userId !== 'undefined' && userId) { %>
+            <a class="btn btn-primary btn-lg px-4 me-md-2" href="/projects">
+              <i class="fas fa-rocket me-2"></i>Go to Dashboard
+            </a>
+            <a class="btn btn-outline-light btn-lg px-4" href="/tasks">
+              <i class="fas fa-tasks me-2"></i>View Tasks
+            </a>
+            <% } else { %>
+            <a class="btn btn-primary btn-lg px-4 me-md-2" href="/register">
+              <i class="fas fa-rocket me-2"></i>Get Started
+            </a>
+            <a class="btn btn-outline-primary btn-lg px-4" href="/login">
+              <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ps-lg-5 mt-5 mt-lg-0">
+          <div class="card shadow-lg border-0">
+            <div class="card-body p-4">
+              <div class="text-center mb-4">
+                <i class="fas fa-chart-line fa-4x text-primary mb-3"></i>
+                <h3>Why Choose Our Platform?</h3>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Easy to Use</strong>
+                      <p class="text-muted mb-0 small">
+                        Intuitive interface for all users
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Real-time Updates</strong>
+                      <p class="text-muted mb-0 small">
+                        Stay informed with live progress
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Team Collaboration</strong>
+                      <p class="text-muted mb-0 small">
+                        Work together effectively
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Progress Tracking</strong>
+                      <p class="text-muted mb-0 small">
+                        Monitor your project milestones
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Task Management</strong>
+                      <p class="text-muted mb-0 small">
+                        Organize and prioritize tasks
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="d-flex align-items-start">
+                    <i class="fas fa-check text-success me-3 mt-1"></i>
+                    <div>
+                      <strong>Deadline Alerts</strong>
+                      <p class="text-muted mb-0 small">
+                        Never miss important deadlines
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<section class="py-5" id="features">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3">Powerful Features</h2>
+      <p class="text-muted lead">
+        Everything you need to manage your projects effectively
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-primary text-white">
+              <i class="fas fa-project-diagram fa-2x"></i>
+            </div>
+            <h5 class="card-title">Project Management</h5>
+            <p class="card-text text-muted">
+              Create and organize multiple projects with detailed descriptions,
+              timelines, and progress tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-success text-white">
+              <i class="fas fa-list-check fa-2x"></i>
+            </div>
+            <h5 class="card-title">Task Tracking</h5>
+            <p class="card-text text-muted">
+              Break down projects into manageable tasks with priorities, due
+              dates, and status updates.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-info text-white">
+              <i class="fas fa-users fa-2x"></i>
+            </div>
+            <h5 class="card-title">Team Collaboration</h5>
+            <p class="card-text text-muted">
+              Assign tasks to team members and track progress with real-time
+              updates and notifications.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-warning text-white">
+              <i class="fas fa-chart-pie fa-2x"></i>
+            </div>
+            <h5 class="card-title">Progress Analytics</h5>
+            <p class="card-text text-muted">
+              Visualize project progress with detailed charts and statistics for
+              better decision making.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-danger text-white">
+              <i class="fas fa-bell fa-2x"></i>
+            </div>
+            <h5 class="card-title">Smart Notifications</h5>
+            <p class="card-text text-muted">
+              Get alerted for upcoming deadlines, task assignments, and
+              important project updates.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100 text-center">
+          <div class="card-body p-4">
+            <div class="feature-icon bg-secondary text-white">
+              <i class="fas fa-mobile-alt fa-2x"></i>
+            </div>
+            <h5 class="card-title">Responsive Design</h5>
+            <p class="card-text text-muted">
+              Access your projects from any device with our fully responsive and
+              mobile-friendly interface.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Public Access Section -->
+<section class="py-5 bg-light" id="public-access">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h3 class="fw-bold mb-3">Public Access Available</h3>
+        <p class="text-muted mb-4">
+          Want to see what we're working on? Browse our projects and tasks
+          without logging in. Our public view mode allows you to explore project
+          progress and task statuses in read-only format.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="/public/projects" class="btn btn-primary btn-lg">
+            <i class="fas fa-project-diagram me-2"></i>View Public Projects
+          </a>
+          <a href="/public/tasks" class="btn btn-outline-primary btn-lg">
+            <i class="fas fa-list-check me-2"></i>View Public Tasks
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center">
+        <div class="feature-icon bg-primary text-white mx-auto">
+          <i class="fas fa-eye fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="py-5" id="statistics">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3">Why Project Management Matters</h2>
+      <p class="text-muted lead">
+        Boost your team's productivity and success rates
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-3 text-center mb-4">
+        <div class="display-4 fw-bold text-primary">47%</div>
+        <p class="text-muted">More projects delivered on time</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div class="display-4 fw-bold text-success">62%</div>
+        <p class="text-muted">Increase in team productivity</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div class="display-4 fw-bold text-info">78%</div>
+        <p class="text-muted">Better resource allocation</p>
+      </div>
+      <div class="col-md-3 text-center mb-4">
+        <div class="display-4 fw-bold text-warning">85%</div>
+        <p class="text-muted">Higher team satisfaction</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white" id="cta">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8">
+        <h3 class="fw-bold mb-3">Ready to Get Started?</h3>
+        <p class="mb-4 opacity-75">
+          Join thousands of teams who are already managing their projects more
+          effectively. Start your journey towards better project management
+          today.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <% if (typeof userId !== 'undefined' && userId) { %>
+        <a href="/projects" class="btn btn-light btn-lg">
+          <i class="fas fa-rocket me-2"></i>Go to Dashboard
+        </a>
+        <% } else { %>
+        <a href="/register" class="btn btn-light btn-lg me-2">
+          <i class="fas fa-user-plus me-2"></i>Sign Up Free
+        </a>
+        <a href="/login" class="btn btn-outline-light btn-lg">
+          <i class="fas fa-sign-in-alt me-2"></i>Login
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light" id="testimonials">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold mb-3">What Our Users Say</h2>
+      <p class="text-muted lead">
+        Hear from teams who transformed their workflow
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon bg-primary text-white mx-auto mb-3">
+              <i class="fas fa-user fa-lg"></i>
+            </div>
+            <p class="card-text fst-italic mb-3">
+              "This platform revolutionized how our team manages projects. The
+              task tracking features are incredible!"
+            </p>
+            <h6 class="card-title mb-1">Sarah Johnson</h6>
+            <small class="text-muted">Project Manager</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon bg-success text-white mx-auto mb-3">
+              <i class="fas fa-user fa-lg"></i>
+            </div>
+            <p class="card-text fst-italic mb-3">
+              "The public access feature is genius! Our clients can now track
+              progress without needing accounts."
+            </p>
+            <h6 class="card-title mb-1">Michael Chen</h6>
+            <small class="text-muted">Team Lead</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 h-100">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon bg-info text-white mx-auto mb-3">
+              <i class="fas fa-user fa-lg"></i>
+            </div>
+            <p class="card-text fst-italic mb-3">
+              "Finally, a project management tool that's both powerful and easy
+              to use. Our productivity skyrocketed!"
+            </p>
+            <h6 class="card-title mb-1">Emily Rodriguez</h6>
+            <small class="text-muted">Development Team</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
