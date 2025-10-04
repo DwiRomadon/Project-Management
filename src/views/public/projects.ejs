@@ -88,18 +88,16 @@
   new Date() && t.status !== 'COMPLETED'; }).length; %>
   <div class="col-xl-4 col-lg-6 mb-4">
     <div class="card h-100 project-card">
-      <div
-        class="card-header d-flex justify-content-between align-items-center"
-      >
+      <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="card-title mb-0 text-truncate"><%= project.name %></h5>
-        <div>
-          <span
-            class="badge bg-<%= overdueTasks > 0 ? 'danger' : 'secondary' %> me-1"
-          >
+        
+        <div class="d-flex align-items-center gap-1">
+          <span class="badge bg-<%= overdueTasks > 0 ? 'danger' : 'secondary' %>">
             <%= totalTasks %> tasks
           </span>
-          <span class="badge bg-light text-dark">
-            <i class="fas fa-user me-1"></i><%= project.manager.name %>
+          
+          <span class="badge <%= progress === 100 ? 'bg-success' : 'bg-danger' %>">
+            <%= progress === 100 ? 'Completed' : 'In Progress' %>
           </span>
         </div>
       </div>
